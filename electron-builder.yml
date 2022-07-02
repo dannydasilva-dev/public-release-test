@@ -1,0 +1,4 @@
+appId: com.glacier.chat
+publish:
+  provider: github
+  token: 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
