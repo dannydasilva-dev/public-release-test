@@ -17,5 +17,8 @@
   "repository": {
     "type": "git",
     "url": "https://github.com/dannydasilva-dev/auto-example.git"
+  },
+  "dependencies": {
+    "electron-updater": "^5.0.5"
   }
 }
