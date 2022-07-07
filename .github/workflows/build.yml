@@ -1,0 +1,34 @@
+name: "🔧 🚀 🟢 Manual publish"
+
+on:
+  workflow_dispatch:
+jobs:
+  release:
+    name: 🚀 Manual publish
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: 🟢 Use Node.js
+        uses: actions/setup-node@v1
+        with:
+          node-version: 14
+      - name: Install deps
+        run: yarn install
+      - name: set github name
+        run: git config --global user.name 'dannydasilva-dev'
+      - name: set github  email
+        run: git config --global user.email 'danny.dev.glacier@gmail.com'
+      - name: Retrieve Current Version
+        run: |
+          echo "CURRENT_VERSION=$(node -p "try { require('./package.json').version } catch(e) {}")" >> $GITHUB_ENV
+        id: current
+      - name: bump version
+        run: |
+              npm version patch -m "v%s"
+      - name: Build/release Electron app
+        uses: samuelmeuli/action-electron-builder@v1.6.0
+        with:
+          github_token: ${{ secrets.github_token }}
+          release: True
+      - name: Push git
+        run: git push
