@@ -9,6 +9,12 @@
     "deploy": "electron-builder build --win --publish always"
   },
   "author": "dannydasilva-dev",
+  "build": {
+    "publish": {
+      "provider": "github",
+      "releaseType": "release"
+    }
+  },
   "license": "ISC",
   "devDependencies": {
     "electron": "^19.0.7",
