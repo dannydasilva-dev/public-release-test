@@ -5,7 +5,7 @@ on:
 jobs:
   release:
     name: 🚀 Manual publish
-    runs-on: windows-latest
+    runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
       - name: 🟢 Use Node.js
@@ -32,3 +32,20 @@ jobs:
           release: True
       - name: Push git
         run: git push
+  mirror_if_release:
+    # Only put on public repository if release build successfully completes
+    needs: release
+    runs-on: ubuntu-latest
+    env:
+      REF: ${{ github.ref }}
+    steps:
+      - name: Checkout Code (release-only)
+        if: github.ref != 'refs/heads/main'
+        uses: actions/checkout@v1
+
+      - name: Post to Public Repo (release-only)
+        if: github.ref != 'refs/heads/main'
+        run: |
+          git remote add mirror "https://dannydasilva-dev:${{ secrets.access_token }}@github.com/dannydasilva-dev/public-release.git"
+          git push --force --prune mirror "refs/remotes/origin/main:refs/heads/main"
+          git push --force --prune mirror "refs/tags/v*:refs/tags/v*"
