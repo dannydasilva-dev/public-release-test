@@ -10,11 +10,37 @@
   },
   "author": "dannydasilva-dev",
   "build": {
+    "files": [
+        "main.js",
+        "index.html",
+        "package.json",
+    ],
+    "mac": {
+        "category": "public.app-category.social-networking",
+        "type": "distribution",
+        "identity": "Glacier Security, Inc. (5MXM7J8H38)",
+        "hardenedRuntime": true,
+        "icon": "images/icon.icns"
+    },
+    "linux": {
+        "target": [
+            "AppImage"
+        ],
+        "icon": "images/icon.png"
+    },
+    "win": {
+        "target": "nsis",
+        "icon": "images/icon.ico"
+    },
     "publish": {
-      "provider": "github",
-      "releaseType": "release"
+        "provider": "github",
+        "releaseType": "release",
+        "repo": "auto-example",
+        "owner": "dannydasilva-dev",
+        "private": true,
+        "token": "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"
     }
-  },
+},
   "license": "ISC",
   "devDependencies": {
     "electron": "^19.0.7",
