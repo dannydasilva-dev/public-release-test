@@ -13,7 +13,7 @@
     "files": [
         "main.js",
         "index.html",
-        "package.json"
+        "package.json",
     ],
     "mac": {
         "category": "public.app-category.social-networking",
@@ -40,7 +40,7 @@
         "private": true,
         "token": "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"
     }
-  },
+},
   "license": "ISC",
   "devDependencies": {
     "electron": "^19.0.7",
