@@ -40,11 +40,9 @@ jobs:
       REF: ${{ github.ref }}
     steps:
       - name: Checkout Code (release-only)
-        if: github.ref != 'refs/heads/main'
         uses: actions/checkout@v1
 
       - name: Post to Public Repo (release-only)
-        if: github.ref != 'refs/heads/main'
         run: |
           git remote add mirror "https://dannydasilva:${{ secrets.access_token }}@github.com/dannydasilva-dev/public-release-test.git"
           git push --force --prune mirror "refs/remotes/origin/main:refs/heads/main"
